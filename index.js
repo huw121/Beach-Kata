@@ -4,8 +4,9 @@ dependency on another job. For example, a may depend on b, meaning the final seq
 dependency, the position of a in the final sequence does not matter.
 */
 
-const sequenceJobs = () => {
-  return '';
+const sequenceJobs = (taskSequence) => {
+  if (!taskSequence) return []
+  return taskSequence.split(',');
 }
 
 module.exports = sequenceJobs;
