@@ -38,4 +38,10 @@ describe('sequenceJobs', () => {
     const expected = "Error - tasks cannot depend upon themselves";
     expect(result).to.equal(expected);
   });
+  it('should return "Error - tasks cannot have circular dependencies" when passed ciricularly dependent tasks', () => {
+    const input = 'x,a-b,b-d,c,d-a,e-d,f,g';
+    const result = sequenceJobs(input);
+    const expected = "Error - tasks cannot have circular dependencies";
+    expect(result).to.equal(expected);
+  });
 });

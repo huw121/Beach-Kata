@@ -10,20 +10,21 @@ const sequenceJobs = (tasks) => {
   const taskSequence = [];
   while (taskSequence.length !== taskArray.length) {
     let changes = 0;
+    let error;
     taskArray.map(task => {
       if (task.length == 1 && !taskSequence.includes(task)) {
         taskSequence.push(task);
         changes++;
       } else {
-        const dependent = task.split('-')[1];
+        const dependent = task[2];
+        if (dependent === task[0]) error = 'Error - tasks cannot depend upon themselves'
         if (taskSequence.includes(dependent) && !taskSequence.includes(task[0])) {
           taskSequence.push(task[0]);
           changes++;
         }
       }
     })
-    console.log(taskSequence)
-    if (changes == 0) return "unable to sequence tasks";
+    if (changes == 0) return error ? error : 'Error - tasks cannot have circular dependencies';
   }
   return taskSequence;
 }
