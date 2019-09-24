@@ -26,4 +26,10 @@ describe('sequenceJobs', () => {
     const expected = ['b', 'a'];
     expect(result).to.eql(expected);
   });
+  it('should handle multiple dependent tasks and independent tasks', () => {
+    const input = 'a-b,b,c,d-a,e-d,f,g,h-i,i-c,j-l,k-j,l-h';
+    const result = sequenceJobs(input);
+    const expected = ['b', 'c', 'f', 'g', 'i', 'a', 'd', 'e', 'h','l','j','k'];
+    expect(result).to.eql(expected);
+  });
 });
