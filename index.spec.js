@@ -32,4 +32,10 @@ describe('sequenceJobs', () => {
     const expected = ['b', 'c', 'f', 'g', 'i', 'a', 'd', 'e', 'h','l','j','k'];
     expect(result).to.eql(expected);
   });
+  it('should return "Error - tasks cannot depend upon themselves" when passed a task sequence containing a task which depends upon itself', () => {
+    const input = 'a-b,b,c,d-a,e-d,f,g,h-h';
+    const result = sequenceJobs(input);
+    const expected = "Error - tasks cannot depend upon themselves";
+    expect(result).to.equal(expected);
+  });
 });
